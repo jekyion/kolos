@@ -1,0 +1,26 @@
+@Rest controller
+public class AverageApiController {
+
+	private static final Logger LOG = LoggerFactory.getLogger(AverageApiController.class);
+
+@GetMapping("/api/math/digits/{digits}")
+
+public ResponseEntity<Map<String, Double>> getAverage(@PathVariable("digits") String digits) {
+
+	LOG.info("*** digits inside server: {}",digits);
+
+	return ResponseEntity.ok().build() // na koniec	return ResponseEntity.ok(calculateAverage(digits));
+
+public Map<String, Double> calculateAverage(String digits) {
+	String[] digitsAsArraysOfString = digits.split(",");
+	double sumElements = 0.0;
+
+	for(String digit: digitsAsArrayOfString){
+		sumElements += Double.parseDouble(digit);
+	}
+
+	Map<String, Double> result = new HashMap<>();
+	result.put("average",sumElements / digitsAsArraysOfStrings.length);
+	 
+	return result;
+}
